@@ -22,7 +22,7 @@ def test_filter_table_once():
     pts, cols, meta = rgbd_to_colored_pointcloud(cfg, max_points=80000)
     print("Raw cloud:", pts.shape[0])
 
-    z_table = 0.52
+    z_table = 0
     # ÄNDERE DIESE ZEILE:
     pts_obj, cols_obj, mask = filter_table_by_height_colored(pts, cols, z_table=z_table, band=0.005)  # 0.005 statt 0.02!
     print("Above table:", pts_obj.shape[0])
@@ -69,7 +69,7 @@ def test_colored_pointcloud_once():
         import matplotlib.pyplot as plt
         fig = plt.figure(figsize=(5,5))
         ax = fig.add_subplot(111, projection='3d')
-        s = 1 if pts.shape[0] <= 30000 else 0.5
+        s = 1 if pts.shape[0] <= 30000 else 0.5 
         ax.scatter(pts[:,0], pts[:,1], pts[:,2], c=cols, s=s)
         ax.set_title("Colored Point Cloud (world)")
         ax.set_xlabel("X"); ax.set_ylabel("Y"); ax.set_zlabel("Z")
@@ -83,17 +83,19 @@ def test_pointcloud_once():
     rgb, depth_m, seg, view_mat, proj_mat, (near, far, W, H, fov) = get_rgbd_with_config(cfg, return_matrices=True)
     pts_world, valid_mask = depth_to_pointcloud_world(depth_m, view_mat, W, H, fov)
     print("Point cloud:", pts_world.shape[0], "points")
-
+    import numpy as np
+    pts_world_new = np.flip(pts_world, axis=1)  # Flip für bessere Ansicht)
+    #pts_world_new = np.flip(pts_world_new)
     # Optional quick scatter (downsample for speed)
     try:
         import numpy as np
         import matplotlib.pyplot as plt
-        n = pts_world.shape[0]
+        n = pts_world_new.shape[0]
         if n > 20000:
             idx = np.random.choice(n, 20000, replace=False)
-            pts = pts_world[idx]
+            pts = pts_world_new[idx]
         else:
-            pts = pts_world
+            pts = pts_world_new
         fig = plt.figure(figsize=(5,5))
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(pts[:,0], pts[:,1], pts[:,2], s=1)

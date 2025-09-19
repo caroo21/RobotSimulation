@@ -48,3 +48,7 @@ Thumbs.db
 *.env
 *.local
 .env.*
+
+robo_ros/
+*.h5
+*.pkl

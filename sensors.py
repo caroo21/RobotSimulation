@@ -59,7 +59,7 @@ def get_rgbd_frame(
 
     seg = np.array(seg).reshape(h, w)
 
-    if return_matrices:
+    if return_matrices: 
         return rgb, depth_m, seg, view_mat, proj_mat, (near, far, width, height, fov_deg)
     return rgb, depth_m, seg
 

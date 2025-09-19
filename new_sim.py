@@ -4,7 +4,7 @@ import numpy as np
 import time
 import math 
 from sensors import CameraConfig, get_rgbd_with_config
-from test import test_filter_table_once
+from test import test_filter_table_once, test_pointcloud_once
 
 def setup_scene():
     # Verbindung mit GUI
@@ -59,13 +59,13 @@ def main():
         time.sleep(1.0 / 60.0)
 
     cam_cfg = CameraConfig(eye=(0.4, 0.0, 0.7),      # Näher und niedriger (war: 0.7, 0.0, 1.1)
-    target=(0.0, 0.0, 0.52),  # Direkt auf Tischplatte (war: 0.0, 0.0, 0.6)
-    fov_deg=75.0,             # Weiterer Blickwinkel (war: 60.0)
+    target=(0.0, 0.0, 0.52),  # Direkt auf Tischplatte 
+    fov_deg=75.0,             # Weiterer Blickwinkel 
     max_range=1.5)
     rgb, depth_m, seg = get_rgbd_with_config(cam_cfg)
     print("Config capture OK:", rgb.shape, depth_m.shape)
 
-    test_filter_table_once()
+    test_pointcloud_once()
 
     # Noch etwas Simulation laufen lassen, damit GUI offen bleibt
     try:
