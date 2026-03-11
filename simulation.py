@@ -4,7 +4,7 @@ import numpy as np
 import time
 import math 
 from sensors import CameraConfig, get_rgbd_with_config
-from test import test_filter_table_once, test_pointcloud_once
+from test_pointcloud import test_filter_table_once, test_pointcloud_once
 
 def setup_scene():
     # Verbindung mit GUI
