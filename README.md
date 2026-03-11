@@ -14,13 +14,14 @@ and filter 3D point clouds of the scene.
 
 ## File Structure
 ```
-├── new_sim.py          # Main simulation entry point
-├── sim_minimum.py      # Minimal simulation setup
-├── sensors.py          # Camera config & RGBD capture
-├── kinematics.py       # Robot kinematics
-├── helper_classes.py   # Shared utilities
-├── model.py            # Neural network model
-├── test.py             # Point cloud & filter tests
+├── simulation.py           # Main simulation entry point
+├── simulation_minimal.py   # Minimal simulation setup
+├── sensors.py              # Camera config & RGBD capture
+├── kinematics.py           # Robot kinematics
+├── circle_objects.py       # Circle obstacle objects
+├── helper_classes.py       # Shared utilities
+├── model.py                # Neural network model
+├── test_pointcloud.py      # Point cloud & filter tests
 ```
 
 ## Setup
@@ -33,19 +34,18 @@ conda activate robotsim
 
 ### 2. Install dependencies
 ```bash
-pip install pybullet numpy
-pip freeze > requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 3. Run the simulation
 ```bash
-python new_sim.py
+python simulation.py
 ```
 A PyBullet GUI window will open showing the Kuka arm on the table.  
 Press `Ctrl+C` to stop.
 
 ## How it works
-1. `new_sim.py` sets up the scene (plane, table, robot, objects)
+1. `simulation.py` sets up the scene (plane, table, robot, objects)
 2. `sensors.py` captures an RGBD image from a configurable virtual camera
-3. `test.py` processes the depth image into a 3D point cloud and filters it
+3. `test_obstacles.py` processes the depth image into a 3D point cloud and filters it
 4. The simulation keeps running at 240Hz until manually stopped
