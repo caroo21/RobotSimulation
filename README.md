@@ -44,7 +44,7 @@ python simulation.py
 A PyBullet GUI window will open showing the Kuka arm on the table.  
 Press `Ctrl+C` to stop.
 
-! [Demo](assets/simulation.png)
+![Demo](assets/simulation.png)
 
 ## How it works
 1. `simulation.py` sets up the scene (plane, table, robot, objects)
